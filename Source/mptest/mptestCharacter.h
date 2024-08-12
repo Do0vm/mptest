@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "mptestCharacter.generated.h"
 
 class USpringArmComponent;
@@ -81,6 +82,22 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void CallClientTravel(const FString& Address);
+
+public:
+		
+
+	IOnlineSessionPtr OnlineSessionInterface;	//Pointer to the online Session interface
+
+
+protected:
+	UFUNCTION(BlueprintCallable)
+	void CreateGameSession();
+
+	void OnCreateSessionComplete(FName SessionName, bool bWasSuccessful);
+
+private:
+
+	FOnCreateSessionCompleteDelegate CreateSessionCompleteDelegate;
 
 };
 
